@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f49d44028134efca3fea2948d0bce57" Name="Diagram1">
+        <EntityTypeShape EntityType="ClientsModel.Client" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.Company" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.Country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.Industry" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.Lawyer" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.MatterType" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientsModel.Matter" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="ClientsModel.FK_Clients_ToCountries" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Clients_ToIndustries" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Clients_ToLawyers" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Matters_ToClients" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Matters_ToCompanies" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Matters_ToLawyers" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientsModel.FK_Matters_ToMatterTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

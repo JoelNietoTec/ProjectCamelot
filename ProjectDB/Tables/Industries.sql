@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Industries]
+(
+	[Id] NVARCHAR(2) NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(150) NULL
+)

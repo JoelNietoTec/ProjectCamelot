@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClientsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="BillName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ChargeAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="SendAddress" Type="nvarchar" MaxLength="150" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="LawyerId" Type="int" />
+          <Property Name="IndustryId" Type="nvarchar" MaxLength="2" />
+          <Property Name="CreationDate" Type="date" />
+          <Property Name="ModificationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" />
+          <Property Name="Region" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Industries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Lawyers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Position" Type="nvarchar" MaxLength="1" />
+          <Property Name="AddDate" Type="date" />
+          <Property Name="StartDate" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GALA_Service.dbo.Matters' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Matters">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="MatterId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="MatterId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="LawyerId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="MatterTypeId" Type="int" />
+          <Property Name="ChargedFees" Type="money" />
+          <Property Name="ChargedExpenses" Type="money" />
+          <Property Name="DepositBalance" Type="money" />
+          <Property Name="FeesBalance" Type="money" />
+          <Property Name="PaidExpenses" Type="money" />
+          <Property Name="ExpensesBalance" Type="money" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="MatterTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clients_ToCountries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_ToIndustries">
+          <End Role="Industries" Type="Self.Industries" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_ToLawyers">
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToClients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToCompanies">
+          <End Role="Companies" Type="Self.Companies" Multiplicity="1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToLawyers">
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToMatterTypes">
+          <End Role="MatterTypes" Type="Self.MatterTypes" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatterTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="MatterTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="InitCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="InputString" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ClientsModelStoreContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Industries" EntityType="Self.Industries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lawyers" EntityType="Self.Lawyers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatterTypes" EntityType="Self.MatterTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matters" EntityType="Self.Matters" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Matters].[CompanyId] AS [CompanyId], 
+[Matters].[MatterId] AS [MatterId], 
+[Matters].[ClientId] AS [ClientId], 
+[Matters].[LawyerId] AS [LawyerId], 
+[Matters].[Name] AS [Name], 
+[Matters].[MatterTypeId] AS [MatterTypeId], 
+[Matters].[ChargedFees] AS [ChargedFees], 
+[Matters].[ChargedExpenses] AS [ChargedExpenses], 
+[Matters].[DepositBalance] AS [DepositBalance], 
+[Matters].[FeesBalance] AS [FeesBalance], 
+[Matters].[PaidExpenses] AS [PaidExpenses], 
+[Matters].[ExpensesBalance] AS [ExpensesBalance], 
+[Matters].[Notes] AS [Notes], 
+[Matters].[CreatedDate] AS [CreatedDate], 
+[Matters].[Status] AS [Status]
+FROM [dbo].[Matters] AS [Matters]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Clients_ToCountries" Association="Self.FK_Clients_ToCountries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_ToIndustries" Association="Self.FK_Clients_ToIndustries">
+            <End Role="Industries" EntitySet="Industries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_ToLawyers" Association="Self.FK_Clients_ToLawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToClients" Association="Self.FK_Matters_ToClients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToCompanies" Association="Self.FK_Matters_ToCompanies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToLawyers" Association="Self.FK_Matters_ToLawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToMatterTypes" Association="Self.FK_Matters_ToMatterTypes">
+            <End Role="MatterTypes" EntitySet="MatterTypes" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClientsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BillName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ChargeAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SendAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LawyerId" Type="Int32" />
+          <Property Name="IndustryId" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="0" />
+          <Property Name="ModificationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Clients_ToCountries" FromRole="Clients" ToRole="Countries" />
+          <NavigationProperty Name="Industry" Relationship="Self.FK_Clients_ToIndustries" FromRole="Clients" ToRole="Industries" />
+          <NavigationProperty Name="Lawyer" Relationship="Self.FK_Clients_ToLawyers" FromRole="Clients" ToRole="Lawyers" />
+          <NavigationProperty Name="Matters" Relationship="Self.FK_Matters_ToClients" FromRole="Clients" ToRole="Matters" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Matters" Relationship="Self.FK_Matters_ToCompanies" FromRole="Companies" ToRole="Matters" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ToCountries" FromRole="Countries" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ToIndustries" FromRole="Industries" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Lawyer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="AddDate" Type="DateTime" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_ToLawyers" FromRole="Lawyers" ToRole="Clients" />
+          <NavigationProperty Name="Matters" Relationship="Self.FK_Matters_ToLawyers" FromRole="Lawyers" ToRole="Matters" />
+        </EntityType>
+        <EntityType Name="MatterType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Matters" Relationship="Self.FK_Matters_ToMatterTypes" FromRole="MatterTypes" ToRole="Matters" />
+        </EntityType>
+        <EntityType Name="Matter">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="MatterId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="MatterId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="LawyerId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MatterTypeId" Type="Int32" />
+          <Property Name="ChargedFees" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChargedExpenses" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DepositBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FeesBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PaidExpenses" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ExpensesBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Matters_ToClients" FromRole="Matters" ToRole="Clients" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Matters_ToCompanies" FromRole="Matters" ToRole="Companies" />
+          <NavigationProperty Name="Lawyer" Relationship="Self.FK_Matters_ToLawyers" FromRole="Matters" ToRole="Lawyers" />
+          <NavigationProperty Name="MatterType" Relationship="Self.FK_Matters_ToMatterTypes" FromRole="Matters" ToRole="MatterTypes" />
+        </EntityType>
+        <Association Name="FK_Clients_ToCountries">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_ToIndustries">
+          <End Role="Industries" Type="Self.Industry" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IndustryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_ToLawyers">
+          <End Role="Lawyers" Type="Self.Lawyer" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToClients">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToCompanies">
+          <End Role="Companies" Type="Self.Company" Multiplicity="1" />
+          <End Role="Matters" Type="Self.Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToLawyers">
+          <End Role="Lawyers" Type="Self.Lawyer" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matters_ToMatterTypes">
+          <End Role="MatterTypes" Type="Self.MatterType" Multiplicity="0..1" />
+          <End Role="Matters" Type="Self.Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MatterTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="MatterTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GALA_ServiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Industries" EntityType="Self.Industry" />
+          <EntitySet Name="Lawyers" EntityType="Self.Lawyer" />
+          <EntitySet Name="MatterTypes" EntityType="Self.MatterType" />
+          <EntitySet Name="Matters" EntityType="Self.Matter" />
+          <AssociationSet Name="FK_Clients_ToCountries" Association="Self.FK_Clients_ToCountries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_ToIndustries" Association="Self.FK_Clients_ToIndustries">
+            <End Role="Industries" EntitySet="Industries" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_ToLawyers" Association="Self.FK_Clients_ToLawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToClients" Association="Self.FK_Matters_ToClients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToCompanies" Association="Self.FK_Matters_ToCompanies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToLawyers" Association="Self.FK_Matters_ToLawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matters_ToMatterTypes" Association="Self.FK_Matters_ToMatterTypes">
+            <End Role="MatterTypes" EntitySet="MatterTypes" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClientsModelStoreContainer" CdmEntityContainer="GALA_ServiceEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ClientsModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BillName" ColumnName="BillName" />
+                <ScalarProperty Name="ChargeAddress" ColumnName="ChargeAddress" />
+                <ScalarProperty Name="SendAddress" ColumnName="SendAddress" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
+                <ScalarProperty Name="IndustryId" ColumnName="IndustryId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="ClientsModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ClientsModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Industries">
+            <EntityTypeMapping TypeName="ClientsModel.Industry">
+              <MappingFragment StoreEntitySet="Industries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lawyers">
+            <EntityTypeMapping TypeName="ClientsModel.Lawyer">
+              <MappingFragment StoreEntitySet="Lawyers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatterTypes">
+            <EntityTypeMapping TypeName="ClientsModel.MatterType">
+              <MappingFragment StoreEntitySet="MatterTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matters">
+            <EntityTypeMapping TypeName="ClientsModel.Matter">
+              <MappingFragment StoreEntitySet="Matters">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="MatterId" ColumnName="MatterId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MatterTypeId" ColumnName="MatterTypeId" />
+                <ScalarProperty Name="ChargedFees" ColumnName="ChargedFees" />
+                <ScalarProperty Name="ChargedExpenses" ColumnName="ChargedExpenses" />
+                <ScalarProperty Name="DepositBalance" ColumnName="DepositBalance" />
+                <ScalarProperty Name="FeesBalance" ColumnName="FeesBalance" />
+                <ScalarProperty Name="PaidExpenses" ColumnName="PaidExpenses" />
+                <ScalarProperty Name="ExpensesBalance" ColumnName="ExpensesBalance" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
