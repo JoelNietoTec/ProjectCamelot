@@ -40,7 +40,7 @@ public class ClientsData
     [DataMember]
     public DateTime? CreationDate { get; set; }
 }
-
+[DataContract]
 public class LawyersData
 {
     [DataMember]
@@ -54,7 +54,7 @@ public class LawyersData
     [DataMember]
     public DateTime ? StartDate { get; set; }
 }
-
+[DataContract]
 public class CountriesData
 {
     public int Id { get; set; }
