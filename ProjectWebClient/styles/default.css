@@ -1,0 +1,20 @@
+﻿body {
+}
+
+.navbar-custom {
+    background-color: #00151d !important;
+    color: #fff;
+    border-radius: 0;
+    border-width: 0;
+}
+
+.navbar-custom .navbar-brand {
+    color: #02adee;
+    font-size: 20px;
+}
+
+.navbar-custom .navbar-brand:hover, 
+.navbar-custom .navbar-brand:focus {
+    color: #007cac;
+    text-decoration: none;
+}                          

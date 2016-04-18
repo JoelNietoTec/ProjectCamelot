@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProjectDB", "ProjectDB\ProjectDB.sqlproj", "{74C2C6B7-B158-45AB-A679-934AC2D0B2B0}"
 EndProject
@@ -28,11 +28,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ProjectService", "ProjectSe
 		VWDPort = "51074"
 		SlnRelativePath = "ProjectService\"
 		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectW10Client", "ProjectW10Client\ProjectW10Client.csproj", "{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{942E58B0-A334-4A64-AA72-86CA7F7DDFC0} = {942E58B0-A334-4A64-AA72-86CA7F7DDFC0}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWebClient", "ProjectWebClient\ProjectWebClient.csproj", "{CB1608DF-40D2-4C53-90F9-C2D2E0776B52}"
@@ -105,26 +100,6 @@ Global
 		{942E58B0-A334-4A64-AA72-86CA7F7DDFC0}.Release|x64.Build.0 = Debug|Any CPU
 		{942E58B0-A334-4A64-AA72-86CA7F7DDFC0}.Release|x86.ActiveCfg = Debug|Any CPU
 		{942E58B0-A334-4A64-AA72-86CA7F7DDFC0}.Release|x86.Build.0 = Debug|Any CPU
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|ARM.ActiveCfg = Debug|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|ARM.Build.0 = Debug|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|ARM.Deploy.0 = Debug|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x64.ActiveCfg = Debug|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x64.Build.0 = Debug|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x64.Deploy.0 = Debug|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x86.ActiveCfg = Debug|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x86.Build.0 = Debug|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Debug|x86.Deploy.0 = Debug|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|Any CPU.ActiveCfg = Release|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|ARM.ActiveCfg = Release|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|ARM.Build.0 = Release|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|ARM.Deploy.0 = Release|ARM
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x64.ActiveCfg = Release|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x64.Build.0 = Release|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x64.Deploy.0 = Release|x64
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x86.ActiveCfg = Release|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x86.Build.0 = Release|x86
-		{16F95AB2-2F00-4C50-BFA4-581E9AB65B9B}.Release|x86.Deploy.0 = Release|x86
 		{CB1608DF-40D2-4C53-90F9-C2D2E0776B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB1608DF-40D2-4C53-90F9-C2D2E0776B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB1608DF-40D2-4C53-90F9-C2D2E0776B52}.Debug|ARM.ActiveCfg = Debug|Any CPU

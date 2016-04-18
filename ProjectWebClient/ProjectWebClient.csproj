@@ -66,13 +66,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Themes\TemaDefault\styles.css" />
+    <Content Include="index.html" />
     <Content Include="lib\bootstrap\Content\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\Content\bootstrap-theme.min.css" />
     <Content Include="lib\bootstrap\Content\bootstrap.css" />
     <Content Include="lib\bootstrap\Content\bootstrap.min.css" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Home.aspx" />
     <Content Include="packages.config" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
@@ -84,11 +83,20 @@
     <Content Include="lib\bootstrap\Content\bootstrap-theme.css.map" />
     <Content Include="lib\bootstrap\Content\bootstrap.js" />
     <Content Include="lib\bootstrap\Content\bootstrap.min.js" />
-    <Content Include="Main.Master" />
-    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.2.3.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.map" />
+    <Content Include="lib\AngularJS\angular-mocks.js" />
+    <Content Include="lib\AngularJS\angular-route.js" />
+    <Content Include="lib\AngularJS\angular-route.min.js" />
+    <Content Include="lib\AngularJS\angular.js" />
+    <Content Include="lib\AngularJS\angular.min.js" />
+    <Content Include="lib\AngularJS\angular.min.js.map" />
+    <Content Include="lib\AngularJS\angular-route.min.js.map" />
+    <None Include="lib\jQuery\jquery-2.2.3.intellisense.js" />
+    <Content Include="lib\jQuery\jquery-2.2.3.js" />
+    <Content Include="lib\jQuery\jquery-2.2.3.min.js" />
+    <Content Include="lib\jQuery\jquery-2.2.3.min.map" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\controllers.js" />
+    <Content Include="styles\default.css" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -113,29 +121,16 @@
     <Content Include="lib\WinJS\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Main.Master.cs">
-      <DependentUpon>Main.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Main.Master.designer.cs">
-      <DependentUpon>Main.Master</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <Folder Include="Views\" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

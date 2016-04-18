@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Project Web Client</title>
+    <meta charset="utf-8" />
+
+    <script src="lib/jQuery/jquery-2.2.3.min.js" type="text/javascript"></script>
+    <script src="lib/WinJS/js/base.min.js"></script>
+    <script src="lib/WinJS/js/ui.min.js"></script>
+    <script src="lib/bootstrap/Content/bootstrap.min.js"></script>
+    
+    <link href="lib/bootstrap/Content/bootstrap.css" rel="stylesheet" />
+    <link href="lib/WinJS/css/ui-light.css" rel="stylesheet" />
+
+    <link href="styles/default.css" rel="stylesheet"/>
+
+    <script src="lib/AngularJS/angular.min.js"></script>
+
+    <script src="Scripts/app.js"></script>
+    <script src="Scripts/controllers.js"></script>
+</head>
+<body class="win-type-body" ng-app="mainApp">
+    <nav class="navbar navbar-default navbar-custom" ng-controller="mainController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">{{name}}</a>
+            </div>
+        </div>
+    </nav>
+
+</body>
+</html>
